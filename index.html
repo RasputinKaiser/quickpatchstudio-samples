@@ -10,9 +10,11 @@
       --ink: #151515;
       --muted: #5d6470;
       --line: #d8dde6;
-      --paper: #f7f4ef;
+      --paper: #f6f8fb;
+      --panel: #ffffff;
       --accent: #1f7a8c;
-      --warm: #c07a4a;
+      --accent-strong: #0f5f70;
+      --warm: #b75d36;
     }
     * { box-sizing: border-box; }
     body {
@@ -21,6 +23,7 @@
       background: var(--paper);
       color: var(--ink);
       line-height: 1.45;
+      overflow-x: hidden;
     }
     main {
       width: min(980px, calc(100vw - 32px));
@@ -29,7 +32,7 @@
     }
     header {
       display: grid;
-      gap: 10px;
+      gap: 14px;
       padding-bottom: 24px;
       border-bottom: 1px solid var(--line);
     }
@@ -40,6 +43,42 @@
     }
     h2 { margin: 0 0 10px; font-size: 1.2rem; }
     p { margin: 0; color: var(--muted); max-width: 68ch; }
+    .lead {
+      font-size: 1.08rem;
+      color: #39414d;
+    }
+    .offer-band {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--accent);
+      background: var(--panel);
+      border-radius: 8px;
+    }
+    .offer-band strong { color: var(--ink); }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .cta-row > * { min-width: 0; }
+    .cta-row span { overflow-wrap: anywhere; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 6px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .button:hover { background: var(--accent-strong); }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -49,7 +88,7 @@
     .card {
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: #fffdfa;
+      background: var(--panel);
       overflow: hidden;
     }
     .card-body { padding: 16px; }
@@ -64,6 +103,7 @@
       color: var(--accent);
       text-decoration-thickness: 1px;
       text-underline-offset: 3px;
+      overflow-wrap: anywhere;
     }
     .tags {
       display: flex;
@@ -81,7 +121,11 @@
     }
     @media (max-width: 760px) {
       .grid { grid-template-columns: 1fr; }
-      main { padding-top: 24px; }
+      main {
+        width: min(100%, 360px);
+        padding: 24px 16px 56px;
+      }
+      .card, .offer-band { min-width: 0; }
     }
   </style>
 </head>
@@ -89,13 +133,20 @@
   <main>
     <header>
       <h1>QuickPatchStudio</h1>
-      <p>Small, fast creative builds: logo motion, ad storyboards, cover/layout concepts, and compact web/product polish.</p>
+      <p class="lead">Small paid slices for micro-apps, admin dashboards, bug triage, landing-page fixes, forms, automations, and compact web/product polish.</p>
+      <div class="offer-band">
+        <p><strong>Typical first slice: $35-$100 fixed.</strong> For larger rescue work, start with paid triage: scope the broken path, flag security or payment risks, then ship one contained fix.</p>
+        <div class="cta-row">
+          <a class="button" href="samples/micro-app-triage.html">Open micro-app sample</a>
+          <span>For paid requests: DM <strong>u/Ill_Engineering_6347</strong> on Reddit.</span>
+        </div>
+      </div>
       <div class="tags">
-        <span class="tag">same-day drafts</span>
-        <span class="tag">short-form ads</span>
-        <span class="tag">logo motion</span>
         <span class="tag">micro-apps</span>
-        <span class="tag">layout concepts</span>
+        <span class="tag">admin tools</span>
+        <span class="tag">repo triage</span>
+        <span class="tag">forms and calculators</span>
+        <span class="tag">visual QA</span>
       </div>
     </header>
 
