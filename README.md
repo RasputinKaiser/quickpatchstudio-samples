@@ -7,6 +7,7 @@ Fast-turnaround creative and technical support for small web, video, and product
 - Short logo intros and motion-export concepts
 - Simple product/ad storyboards for social
 - Same-day micro-apps for intake, triage, estimates, and tiny workflows
+- Fixed-scope $200 micro-app / rescue first milestones
 - Discord/server banners and small social header graphics
 - Product/listing mockups for digital goods
 - YouTube thumbnail first-pass layouts
@@ -15,6 +16,7 @@ Fast-turnaround creative and technical support for small web, video, and product
 ## Sample Artifacts
 
 - `samples/logo-reveal-sample.mp4` - clean animated logo reveal sample.
+- `sprint.html` - fixed-scope $200 micro-app / rescue sprint offer.
 - `samples/micro-app-triage.html` - runnable Quick Scope micro-app sample.
 - `samples/micro-app-preview.svg` - static preview for the micro-app sample.
 - `samples/discord-banner-concept.svg` - world-map / character-select banner sample.
