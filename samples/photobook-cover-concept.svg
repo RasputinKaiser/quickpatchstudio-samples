@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-label="Symbolic photobook cover composition">
+  <rect width="900" height="1200" fill="#121722"/>
+  <path d="M450 80 820 350v580L450 1120 80 930V350z" fill="#202a3b" stroke="#e7c772" stroke-width="10"/>
+  <path d="M450 150 750 370 450 560 150 370z" fill="#1f7a8c" opacity=".84"/>
+  <path d="M150 410 420 590 260 920 110 860z" fill="#c07a4a" opacity=".86"/>
+  <path d="M750 410 480 590 640 920 790 860z" fill="#7d4e9d" opacity=".82"/>
+  <path d="M450 640 610 940 450 1035 290 940z" fill="#f0d890" opacity=".9"/>
+  <circle cx="450" cy="470" r="108" fill="#f7f4ef" opacity=".92"/>
+  <circle cx="450" cy="470" r="70" fill="#121722"/>
+  <path d="M450 318v300M300 470h300M345 365l210 210M555 365 345 575" stroke="#e7c772" stroke-width="8" stroke-linecap="round"/>
+  <text x="450" y="190" text-anchor="middle" font-family="Georgia, serif" font-size="46" fill="#f7f4ef">CUSTOM TITLE</text>
+  <text x="450" y="1070" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#f7f4ef" opacity=".8">symbolic cover concept</text>
+</svg>

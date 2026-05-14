@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" role="img" aria-label="QuickPatchStudio logo reveal poster">
+  <rect width="1280" height="800" fill="#101418"/>
+  <circle cx="640" cy="400" r="174" fill="#1f7a8c" opacity=".2"/>
+  <rect x="462" y="222" width="356" height="356" rx="40" fill="none" stroke="#f3d7a4" stroke-width="10"/>
+  <path d="M540 488V312h100q42 0 67 23t25 62q0 38-25 61t-67 23h-42v7h-58zm58-58h39q17 0 27-9t10-24q0-16-10-25t-27-9h-39v67z" fill="#f7f4ef"/>
+  <path d="M722 488V312h58v176h-58z" fill="#c07a4a"/>
+  <text x="640" y="640" text-anchor="middle" font-family="Arial, sans-serif" font-size="46" fill="#f7f4ef">QuickPatchStudio</text>
+</svg>
