@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">React debug rescue preview</title>
+  <desc id="desc">A compact bug triage dashboard with scenario cards, root cause panel, code patch sketch, and verification checklist.</desc>
+  <rect width="960" height="600" fill="#f5f7fa"/>
+  <rect x="42" y="42" width="876" height="516" rx="22" fill="#ffffff" stroke="#d8dde6" stroke-width="3"/>
+  <text x="74" y="100" fill="#171819" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="800">React Debug Rescue</text>
+  <text x="74" y="136" fill="#5b6470" font-family="Inter, Arial, sans-serif" font-size="20">State, API, render, and layout triage for one broken path.</text>
+
+  <g transform="translate(74 182)">
+    <rect width="238" height="292" rx="14" fill="#ffffff" stroke="#d8dde6" stroke-width="3"/>
+    <text x="22" y="42" fill="#171819" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">Pick a bug</text>
+    <rect x="18" y="68" width="202" height="70" rx="12" fill="#e8f4f6" stroke="#1f7a8c" stroke-width="3"/>
+    <text x="34" y="103" fill="#171819" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800">Checkout total jumps</text>
+    <circle cx="39" cy="126" r="8" fill="#1f7a8c"/>
+    <circle cx="70" cy="126" r="8" fill="#9fcdd5"/>
+    <circle cx="101" cy="126" r="8" fill="#9fcdd5"/>
+    <rect x="18" y="154" width="202" height="58" rx="12" fill="#f7f8fa" stroke="#d8dde6" stroke-width="2"/>
+    <text x="34" y="190" fill="#171819" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800">Admin table freezes</text>
+    <rect x="18" y="226" width="202" height="48" rx="12" fill="#f7f8fa" stroke="#d8dde6" stroke-width="2"/>
+    <text x="34" y="257" fill="#171819" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800">Mobile flow overlaps</text>
+  </g>
+
+  <g transform="translate(340 182)">
+    <rect width="258" height="66" rx="14" fill="#f7f8fa" stroke="#d8dde6" stroke-width="2"/>
+    <text x="20" y="42" fill="#171819" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800">High</text>
+    <text x="106" y="42" fill="#5b6470" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800">priority</text>
+    <rect x="0" y="84" width="258" height="108" rx="14" fill="#17232b"/>
+    <text x="20" y="122" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">Likely root cause</text>
+    <text x="20" y="154" fill="#d6e8ef" font-family="Inter, Arial, sans-serif" font-size="17">Optimistic cart state races</text>
+    <text x="20" y="178" fill="#d6e8ef" font-family="Inter, Arial, sans-serif" font-size="17">server-confirmed totals.</text>
+    <rect x="0" y="210" width="258" height="82" rx="14" fill="#ffffff" stroke="#d8dde6" stroke-width="2"/>
+    <circle cx="31" cy="250" r="18" fill="#1f7a8c"/>
+    <text x="26" y="257" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800">1</text>
+    <text x="60" y="246" fill="#171819" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800">Reproduce path</text>
+    <text x="60" y="270" fill="#5b6470" font-family="Inter, Arial, sans-serif" font-size="15">Then patch one flow.</text>
+  </g>
+
+  <g transform="translate(628 182)">
+    <rect width="238" height="292" rx="14" fill="#111820"/>
+    <rect width="238" height="44" rx="14" fill="#172532"/>
+    <text x="18" y="29" fill="#aab8c2" font-family="Menlo, Consolas, monospace" font-size="15">cartTotals.ts</text>
+    <text x="18" y="82" fill="#d6e8ef" font-family="Menlo, Consolas, monospace" font-size="15">const serverCart =</text>
+    <text x="18" y="110" fill="#d6e8ef" font-family="Menlo, Consolas, monospace" font-size="15">  await applyCoupon();</text>
+    <text x="18" y="150" fill="#d6e8ef" font-family="Menlo, Consolas, monospace" font-size="15">setCart(mergeCart(</text>
+    <text x="18" y="178" fill="#d6e8ef" font-family="Menlo, Consolas, monospace" font-size="15">  cart, serverCart</text>
+    <text x="18" y="206" fill="#d6e8ef" font-family="Menlo, Consolas, monospace" font-size="15">));</text>
+    <rect x="18" y="238" width="88" height="28" rx="14" fill="#2f7d5c"/>
+    <text x="39" y="258" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800">verified</text>
+  </g>
+
+  <g transform="translate(340 502)">
+    <rect width="526" height="34" rx="17" fill="#fff6ef" stroke="#b75d36" stroke-width="2"/>
+    <text x="22" y="24" fill="#b75d36" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="900">$200 diagnostic slice</text>
+    <text x="246" y="24" fill="#5b6470" font-family="Inter, Arial, sans-serif" font-size="15">safe preflight, concrete fix</text>
+  </g>
+</svg>

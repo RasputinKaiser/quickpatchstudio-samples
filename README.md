@@ -18,6 +18,8 @@ Fast-turnaround creative and technical support for small web, video, and product
 - `samples/logo-reveal-sample.mp4` - clean animated logo reveal sample.
 - `sprint.html` - fixed-scope $200 micro-app / rescue sprint offer.
 - `samples/micro-app-triage.html` - runnable Quick Scope micro-app sample.
+- `samples/react-debug-rescue.html` - runnable React debugging / rescue diagnostic sample.
+- `samples/react-debug-preview.svg` - static preview for the React debugging sample.
 - `samples/micro-app-preview.svg` - static preview for the micro-app sample.
 - `samples/discord-banner-concept.svg` - world-map / character-select banner sample.
 - `samples/product-mockup-batch.svg` - digital product mockup/listing image sample.
