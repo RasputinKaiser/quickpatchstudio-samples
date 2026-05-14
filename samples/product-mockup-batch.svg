@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">Digital product mockup sample</title>
+  <desc id="desc">A colorful product listing graphic with browser mockups, headline copy, and feature callouts.</desc>
+  <rect width="1200" height="750" fill="#f3efe7"/>
+  <rect x="54" y="58" width="1092" height="634" rx="28" fill="#fffdfa" stroke="#d8dde6" stroke-width="4"/>
+  <rect x="94" y="96" width="430" height="558" rx="22" fill="#15232b"/>
+  <rect x="126" y="132" width="366" height="240" rx="14" fill="#fff7e6"/>
+  <rect x="156" y="168" width="306" height="34" rx="8" fill="#1f7a8c"/>
+  <rect x="156" y="222" width="198" height="18" rx="9" fill="#c07a4a"/>
+  <rect x="156" y="258" width="260" height="18" rx="9" fill="#d8dde6"/>
+  <rect x="156" y="292" width="230" height="18" rx="9" fill="#d8dde6"/>
+  <rect x="126" y="404" width="168" height="188" rx="18" fill="#2d5064"/>
+  <rect x="322" y="404" width="170" height="188" rx="18" fill="#f2c078"/>
+  <path d="M167 520h86M363 520h88M167 552h62M363 552h52" stroke="#fffdfa" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="410" cy="462" r="34" fill="#fffdfa" opacity=".88"/>
+  <text x="580" y="192" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="800" fill="#151515">Launch-ready product visuals</text>
+  <text x="584" y="254" font-family="Inter, Arial, sans-serif" font-size="28" fill="#5d6470">Listing images, hero mockups, and feature tiles for small digital products.</text>
+  <g font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">
+    <rect x="584" y="326" width="236" height="72" rx="14" fill="#e8f3f0"/>
+    <text x="614" y="373" fill="#1f7a8c">Browser frame</text>
+    <rect x="846" y="326" width="224" height="72" rx="14" fill="#fff2e8"/>
+    <text x="878" y="373" fill="#a45e31">Brand colors</text>
+    <rect x="584" y="424" width="284" height="72" rx="14" fill="#f5f0ff"/>
+    <text x="614" y="471" fill="#3f4b87">Readable copy</text>
+    <rect x="894" y="424" width="176" height="72" rx="14" fill="#eef1f5"/>
+    <text x="926" y="471" fill="#5d6470">Exports</text>
+  </g>
+  <rect x="584" y="556" width="330" height="54" rx="27" fill="#1f7a8c"/>
+  <text x="626" y="592" font-family="Inter, Arial, sans-serif" font-size="23" font-weight="800" fill="#fffdfa">sample batch concept</text>
+</svg>
