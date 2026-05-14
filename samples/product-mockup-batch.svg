@@ -13,18 +13,20 @@
   <rect x="322" y="404" width="170" height="188" rx="18" fill="#f2c078"/>
   <path d="M167 520h86M363 520h88M167 552h62M363 552h52" stroke="#fffdfa" stroke-width="16" stroke-linecap="round"/>
   <circle cx="410" cy="462" r="34" fill="#fffdfa" opacity=".88"/>
-  <text x="580" y="192" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="800" fill="#151515">Launch-ready product visuals</text>
-  <text x="584" y="254" font-family="Inter, Arial, sans-serif" font-size="28" fill="#5d6470">Listing images, hero mockups, and feature tiles for small digital products.</text>
+  <text x="580" y="166" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="800" fill="#151515">Launch-ready</text>
+  <text x="580" y="226" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="800" fill="#151515">product visuals</text>
+  <text x="584" y="286" font-family="Inter, Arial, sans-serif" font-size="25" fill="#5d6470">Listing images, hero mockups,</text>
+  <text x="584" y="324" font-family="Inter, Arial, sans-serif" font-size="25" fill="#5d6470">and feature tiles for digital goods.</text>
   <g font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">
-    <rect x="584" y="326" width="236" height="72" rx="14" fill="#e8f3f0"/>
-    <text x="614" y="373" fill="#1f7a8c">Browser frame</text>
-    <rect x="846" y="326" width="224" height="72" rx="14" fill="#fff2e8"/>
-    <text x="878" y="373" fill="#a45e31">Brand colors</text>
-    <rect x="584" y="424" width="284" height="72" rx="14" fill="#f5f0ff"/>
-    <text x="614" y="471" fill="#3f4b87">Readable copy</text>
-    <rect x="894" y="424" width="176" height="72" rx="14" fill="#eef1f5"/>
-    <text x="926" y="471" fill="#5d6470">Exports</text>
+    <rect x="584" y="376" width="236" height="72" rx="14" fill="#e8f3f0"/>
+    <text x="614" y="423" fill="#1f7a8c">Browser frame</text>
+    <rect x="846" y="376" width="224" height="72" rx="14" fill="#fff2e8"/>
+    <text x="878" y="423" fill="#a45e31">Brand colors</text>
+    <rect x="584" y="474" width="284" height="72" rx="14" fill="#f5f0ff"/>
+    <text x="614" y="521" fill="#3f4b87">Readable copy</text>
+    <rect x="894" y="474" width="176" height="72" rx="14" fill="#eef1f5"/>
+    <text x="926" y="521" fill="#5d6470">Exports</text>
   </g>
-  <rect x="584" y="556" width="330" height="54" rx="27" fill="#1f7a8c"/>
-  <text x="626" y="592" font-family="Inter, Arial, sans-serif" font-size="23" font-weight="800" fill="#fffdfa">sample batch concept</text>
+  <rect x="584" y="590" width="330" height="54" rx="27" fill="#1f7a8c"/>
+  <text x="626" y="626" font-family="Inter, Arial, sans-serif" font-size="23" font-weight="800" fill="#fffdfa">sample batch concept</text>
 </svg>
