@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quick Scope Micro-App</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #151515;
+      --muted: #5d6470;
+      --line: #d8dde6;
+      --paper: #f3efe7;
+      --panel: #fffdfa;
+      --accent: #1f7a8c;
+      --warm: #c07a4a;
+      --dark: #15232b;
+      --ok: #2f7d5c;
+      --warn: #b65c3d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    main {
+      width: min(1120px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 28px 0 44px;
+    }
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: end;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    h1, h2, p { margin: 0; }
+    h1 {
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      letter-spacing: 0;
+      line-height: 1;
+    }
+    .sub {
+      margin-top: 12px;
+      color: var(--muted);
+      max-width: 62ch;
+      font-size: 1.05rem;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: #fff;
+      color: var(--muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr);
+      gap: 18px;
+      align-items: start;
+      margin-top: 22px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .jobs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .job {
+      display: grid;
+      gap: 14px;
+      min-height: 260px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      text-align: left;
+      color: inherit;
+      font: inherit;
+    }
+    .job[aria-pressed="true"] {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(31, 122, 140, .14);
+    }
+    .job h2 {
+      font-size: 1.15rem;
+      line-height: 1.15;
+    }
+    .job p {
+      color: var(--muted);
+      font-size: .96rem;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      align-self: end;
+    }
+    .meta span {
+      border-radius: 999px;
+      padding: 5px 8px;
+      font-size: .8rem;
+      font-weight: 800;
+      background: #edf4f5;
+      color: var(--accent);
+    }
+    .summary {
+      display: grid;
+      gap: 16px;
+      position: sticky;
+      top: 18px;
+    }
+    .price {
+      display: grid;
+      gap: 5px;
+      padding: 20px;
+      border-radius: 8px;
+      color: #fffdfa;
+      background: var(--dark);
+    }
+    .price strong {
+      font-size: clamp(2.4rem, 7vw, 4.8rem);
+      line-height: 1;
+    }
+    .bar {
+      height: 12px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #e8edf0;
+    }
+    .bar span {
+      display: block;
+      height: 100%;
+      width: var(--width, 50%);
+      background: var(--accent);
+    }
+    dl {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px 14px;
+      margin: 0;
+    }
+    dt { color: var(--muted); }
+    dd { margin: 0; font-weight: 850; }
+    .risk {
+      display: grid;
+      gap: 10px;
+    }
+    .risk div {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: #f6f7f8;
+      font-weight: 750;
+    }
+    .risk .ok { color: var(--ok); }
+    .risk .warn { color: var(--warn); }
+    a {
+      color: var(--accent);
+      text-underline-offset: 3px;
+    }
+    @media (max-width: 860px) {
+      header, .layout { grid-template-columns: 1fr; }
+      .jobs { grid-template-columns: 1fr; }
+      .summary { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>Quick Scope</h1>
+        <p class="sub">A tiny client-facing app for turning messy rescue requests into a priced first slice without asking for secrets or environment files.</p>
+      </div>
+      <span class="pill">same-day micro-app sample</span>
+    </header>
+
+    <section class="layout" aria-label="Scope calculator">
+      <div class="panel">
+        <h2>Pick a first slice</h2>
+        <p class="sub">This is the sort of compact utility that can ship fast: intake, pricing, risk flags, and a useful next action.</p>
+        <div class="jobs">
+          <button class="job" type="button" data-price="75" data-hours="3" data-risk="25" data-title="Landing polish" aria-pressed="true">
+            <h2>Landing polish</h2>
+            <p>Fix hierarchy, copy, mobile spacing, and one conversion-focused section.</p>
+            <div class="meta"><span>UI</span><span>copy</span><span>low risk</span></div>
+          </button>
+          <button class="job" type="button" data-price="125" data-hours="5" data-risk="55" data-title="App rescue triage" aria-pressed="false">
+            <h2>App rescue triage</h2>
+            <p>Read-only repo inspection, bug map, risk list, and one contained fix path.</p>
+            <div class="meta"><span>repo</span><span>triage</span><span>fix path</span></div>
+          </button>
+          <button class="job" type="button" data-price="200" data-hours="8" data-risk="70" data-title="Tiny ops tool" aria-pressed="false">
+            <h2>Tiny ops tool</h2>
+            <p>Build a one-screen workflow app for intake, status, estimates, or exports.</p>
+            <div class="meta"><span>micro-app</span><span>workflow</span><span>export</span></div>
+          </button>
+        </div>
+      </div>
+
+      <aside class="summary" aria-label="Estimate summary">
+        <div class="price">
+          <span>First slice</span>
+          <strong id="price">$75</strong>
+          <span id="title">Landing polish</span>
+        </div>
+        <div class="panel">
+          <dl>
+            <dt>Estimated time</dt>
+            <dd id="hours">3h</dd>
+            <dt>Delivery</dt>
+            <dd>same day</dd>
+            <dt>Secrets needed</dt>
+            <dd>no</dd>
+          </dl>
+        </div>
+        <div class="panel risk">
+          <h2>Risk gate</h2>
+          <div><span>No env files</span><span class="ok">pass</span></div>
+          <div><span>Scope clarity</span><span id="scopeLabel" class="ok">clean</span></div>
+          <div class="bar" aria-hidden="true"><span id="riskBar" style="--width: 25%;"></span></div>
+        </div>
+        <div class="panel">
+          <p><a href="../index.html">Back to samples</a></p>
+        </div>
+      </aside>
+    </section>
+  </main>
+  <script>
+    const buttons = Array.from(document.querySelectorAll(".job"));
+    const price = document.querySelector("#price");
+    const hours = document.querySelector("#hours");
+    const title = document.querySelector("#title");
+    const riskBar = document.querySelector("#riskBar");
+    const scopeLabel = document.querySelector("#scopeLabel");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        buttons.forEach((item) => item.setAttribute("aria-pressed", "false"));
+        button.setAttribute("aria-pressed", "true");
+        price.textContent = `$${button.dataset.price}`;
+        hours.textContent = `${button.dataset.hours}h`;
+        title.textContent = button.dataset.title;
+        riskBar.style.setProperty("--width", `${button.dataset.risk}%`);
+        const highRisk = Number(button.dataset.risk) > 60;
+        scopeLabel.textContent = highRisk ? "needs guardrails" : "clean";
+        scopeLabel.className = highRisk ? "warn" : "ok";
+      });
+    });
+  </script>
+</body>
+</html>
