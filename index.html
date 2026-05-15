@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
   <title>QuickPatchStudio Samples</title>
   <style>
     :root {
@@ -99,6 +100,43 @@
       object-fit: cover;
       background: #101418;
     }
+    .render-preview {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 28% 34%, rgba(31, 122, 140, .88) 0 9%, transparent 18%),
+        radial-gradient(circle at 64% 62%, rgba(183, 93, 54, .78) 0 8%, transparent 19%),
+        radial-gradient(circle at 78% 28%, rgba(45, 146, 139, .7) 0 7%, transparent 17%),
+        linear-gradient(135deg, #07131b, #10242a 56%, #081017);
+      text-decoration: none;
+    }
+    .render-preview::before {
+      content: "";
+      position: absolute;
+      inset: 12%;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 8px;
+      background:
+        linear-gradient(rgba(255, 255, 255, .06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .06) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .render-preview span {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      background: rgba(8, 14, 22, .76);
+      color: #eef7fb;
+      font-size: .86rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
     a {
       color: var(--accent);
       text-decoration-thickness: 1px;
@@ -179,6 +217,26 @@
           <h2>React Debug Rescue</h2>
           <p>Runnable bug-triage board for state, API, render, and mobile layout rescue slices.</p>
           <p style="margin-top: 12px;"><a href="samples/react-debug-rescue.html">Open debug sample</a></p>
+        </div>
+      </article>
+      <article class="card">
+        <a class="render-preview" href="samples/services-site-rescue.html" aria-label="Open services site rescue sample">
+          <span>Site rescue</span>
+        </a>
+        <div class="card-body">
+          <h2>Services Site Rescue</h2>
+          <p>Before/after cleanup sample for AI-built service sites, mobile polish, and deploy readiness.</p>
+          <p style="margin-top: 12px;"><a href="samples/services-site-rescue.html">Open rescue sample</a></p>
+        </div>
+      </article>
+      <article class="card">
+        <a class="render-preview" href="samples/webgl-render-lab.html" aria-label="Open WebGL render lab sample">
+          <span>WebGL live</span>
+        </a>
+        <div class="card-body">
+          <h2>WebGL Render Lab</h2>
+          <p>Shader-driven canvas sample with pointer interaction, live controls, and performance readouts.</p>
+          <p style="margin-top: 12px;"><a href="samples/webgl-render-lab.html">Open render sample</a></p>
         </div>
       </article>
       <article class="card">

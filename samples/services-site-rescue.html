@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Services Site Rescue</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #151515;
+      --muted: #56616d;
+      --line: #d8dde4;
+      --paper: #f4f7f8;
+      --panel: #ffffff;
+      --blue: #1f6f8b;
+      --green: #257a5b;
+      --amber: #b9652f;
+      --dark: #17242c;
+      --bad: #b34747;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.45;
+      overflow-x: hidden;
+    }
+    main {
+      width: min(1180px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 28px 0 46px;
+    }
+    header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    h1, h2, h3, p { margin: 0; }
+    header > *, .layout > *, .compare > *, .panel, .site, .hero, .block, label {
+      min-width: 0;
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+    h2 { font-size: 1.15rem; }
+    h3 { font-size: .95rem; }
+    .sub {
+      margin-top: 12px;
+      max-width: 68ch;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--panel);
+      color: var(--muted);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
+      gap: 18px;
+      margin-top: 22px;
+      align-items: start;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 18px;
+    }
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .site {
+      display: grid;
+      gap: 12px;
+      min-height: 440px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfd;
+    }
+    .site.before {
+      background:
+        linear-gradient(90deg, rgba(179, 71, 71, .09) 1px, transparent 1px),
+        linear-gradient(#fff, #f7f1ee);
+      background-size: 22px 22px, auto;
+    }
+    .site.after {
+      background:
+        linear-gradient(90deg, rgba(31, 111, 139, .08) 1px, transparent 1px),
+        linear-gradient(#fff, #eef8f4);
+      background-size: 22px 22px, auto;
+    }
+    .hero {
+      display: grid;
+      gap: 12px;
+      min-height: 160px;
+      padding: 16px;
+      border-radius: 8px;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(23, 36, 44, .92), rgba(31, 111, 139, .84)),
+        repeating-linear-gradient(45deg, rgba(255,255,255,.11) 0 8px, transparent 8px 18px);
+    }
+    .before .hero {
+      background:
+        linear-gradient(135deg, rgba(95, 54, 44, .92), rgba(179, 71, 71, .7)),
+        repeating-linear-gradient(45deg, rgba(255,255,255,.14) 0 8px, transparent 8px 18px);
+    }
+    .hero strong {
+      font-size: clamp(1.45rem, 4vw, 2.25rem);
+      line-height: 1.05;
+      overflow-wrap: anywhere;
+    }
+    .hero span { max-width: 38ch; }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      min-height: 38px;
+      padding: 0 12px;
+      border-radius: 6px;
+      background: #ffffff;
+      color: var(--dark);
+      font-weight: 900;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+    .before .cta {
+      width: 100%;
+      color: var(--bad);
+    }
+    .blocks {
+      display: grid;
+      gap: 10px;
+    }
+    .block {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+    .icon {
+      display: grid;
+      place-items: center;
+      height: 40px;
+      border-radius: 8px;
+      color: #fff;
+      background: var(--blue);
+      font-weight: 950;
+    }
+    .before .icon { background: var(--bad); }
+    .block p { color: var(--muted); font-size: .91rem; }
+    .checklist {
+      display: grid;
+      gap: 10px;
+    }
+    label {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 10px;
+      align-items: center;
+      min-height: 44px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      font-weight: 750;
+    }
+    input { width: 18px; height: 18px; }
+    label span:last-child {
+      color: var(--muted);
+      font-size: .88rem;
+      font-weight: 800;
+    }
+    .score {
+      display: grid;
+      gap: 10px;
+      padding: 18px;
+      border-radius: 8px;
+      color: #fff;
+      background: var(--dark);
+    }
+    .score strong {
+      font-size: clamp(2.4rem, 7vw, 4.7rem);
+      line-height: 1;
+    }
+    .bar {
+      height: 12px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255,255,255,.2);
+    }
+    .bar span {
+      display: block;
+      height: 100%;
+      width: var(--ready, 63%);
+      background: #79d9a4;
+      transition: width .18s ease;
+    }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .metric {
+      padding: 12px;
+      border-radius: 8px;
+      background: #f5f7f8;
+    }
+    .metric strong { display: block; font-size: 1.35rem; }
+    .metric span { color: var(--muted); font-size: .88rem; }
+    a {
+      color: var(--blue);
+      text-underline-offset: 3px;
+    }
+    @media (max-width: 920px) {
+      header, .layout, .compare { grid-template-columns: 1fr; }
+      .site { min-height: 0; }
+      .metric-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) {
+      main {
+        width: 100%;
+        padding: 22px 12px 42px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      .panel {
+        padding: 16px;
+      }
+      .hero {
+        padding: 14px;
+      }
+      label {
+        grid-template-columns: auto 1fr;
+      }
+      label span:last-child {
+        grid-column: 2;
+      }
+      .badge { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>Services Site Rescue</h1>
+        <p class="sub">A quick proof for cleaning up AI-built home-service pages: mobile hierarchy, CTA clarity, deploy blockers, and a small no-secrets triage loop.</p>
+      </div>
+      <span class="badge">3 hour first pass</span>
+    </header>
+
+    <section class="layout" aria-label="Service site rescue sample">
+      <div class="panel">
+        <div class="compare">
+          <article class="site before" aria-label="Before cleanup">
+            <h2>Before</h2>
+            <div class="hero">
+              <strong>BEST LOCAL SERVICES FAST</strong>
+              <span>Mixed message, oversized CTA, unclear service area, and weak mobile hierarchy.</span>
+              <span class="cta">CALL NOW BOOK NOW FREE QUOTE</span>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <span class="icon">!</span>
+                <div>
+                  <h3>AI copy drift</h3>
+                  <p>Repeated generic claims with no concrete service promise.</p>
+                </div>
+              </div>
+              <div class="block">
+                <span class="icon">!</span>
+                <div>
+                  <h3>Mobile squeeze</h3>
+                  <p>Buttons and service cards collide below 390px width.</p>
+                </div>
+              </div>
+              <div class="block">
+                <span class="icon">!</span>
+                <div>
+                  <h3>Deploy risk</h3>
+                  <p>Missing metadata, unused scripts, and inconsistent image paths.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="site after" aria-label="After cleanup">
+            <h2>After</h2>
+            <div class="hero">
+              <strong>Same-Day Home Repairs In Your Service Area</strong>
+              <span>Clear offer, one primary action, readable mobile scale, and proof points below the fold.</span>
+              <span class="cta">Get a fast quote</span>
+            </div>
+            <div class="blocks">
+              <div class="block">
+                <span class="icon">1</span>
+                <div>
+                  <h3>Sharper headline</h3>
+                  <p>One service promise, one location cue, one CTA.</p>
+                </div>
+              </div>
+              <div class="block">
+                <span class="icon">2</span>
+                <div>
+                  <h3>Responsive layout</h3>
+                  <p>Stable button, card, and form sizing from mobile to desktop.</p>
+                </div>
+              </div>
+              <div class="block">
+                <span class="icon">3</span>
+                <div>
+                  <h3>Deploy pass</h3>
+                  <p>Clean asset paths, metadata, and a short launch checklist.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <aside class="panel" aria-label="Readiness checklist">
+        <div class="score">
+          <span>Deploy readiness</span>
+          <strong id="readyText">63%</strong>
+          <div class="bar" aria-hidden="true"><span id="readyBar" style="--ready: 63%;"></span></div>
+        </div>
+        <div class="metric-grid" aria-label="First pass metrics">
+          <div class="metric"><strong>3h</strong><span>focused pass</span></div>
+          <div class="metric"><strong>0</strong><span>env files needed</span></div>
+          <div class="metric"><strong>1</strong><span>deploy blocker target</span></div>
+        </div>
+
+        <div style="height: 16px;"></div>
+        <div class="checklist">
+          <label>
+            <input type="checkbox" checked data-score="16">
+            <span>Mobile layout cleaned</span>
+            <span>done</span>
+          </label>
+          <label>
+            <input type="checkbox" checked data-score="14">
+            <span>CTA hierarchy fixed</span>
+            <span>done</span>
+          </label>
+          <label>
+            <input type="checkbox" checked data-score="13">
+            <span>AI copy tightened</span>
+            <span>done</span>
+          </label>
+          <label>
+            <input type="checkbox" checked data-score="20">
+            <span>Deploy blockers mapped</span>
+            <span>done</span>
+          </label>
+          <label>
+            <input type="checkbox" data-score="18">
+            <span>Preview URL verified</span>
+            <span>next</span>
+          </label>
+          <label>
+            <input type="checkbox" data-score="19">
+            <span>Client content swapped in</span>
+            <span>next</span>
+          </label>
+        </div>
+
+        <p class="sub" style="margin-top: 16px;">First slice: screenshots or stripped repo only. Production credentials and environment files can wait until scope and trust are clear.</p>
+        <p style="margin-top: 14px;"><a href="../index.html">Back to samples</a></p>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    const checks = Array.from(document.querySelectorAll("input[type='checkbox']"));
+    const readyText = document.querySelector("#readyText");
+    const readyBar = document.querySelector("#readyBar");
+
+    function updateReady() {
+      const total = checks.reduce((sum, item) => sum + Number(item.dataset.score), 0);
+      const value = checks
+        .filter((item) => item.checked)
+        .reduce((sum, item) => sum + Number(item.dataset.score), 0);
+      const percent = Math.round((value / total) * 100);
+      readyText.textContent = `${percent}%`;
+      readyBar.style.setProperty("--ready", `${percent}%`);
+    }
+
+    checks.forEach((item) => item.addEventListener("change", updateReady));
+    updateReady();
+  </script>
+</body>
+</html>

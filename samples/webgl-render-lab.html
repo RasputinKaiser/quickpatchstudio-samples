@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>QuickPatchStudio WebGL Render Lab</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #151515;
+      --muted: #596270;
+      --line: #d8dde6;
+      --paper: #f6f8fb;
+      --panel: #ffffff;
+      --accent: #1f7a8c;
+      --accent-strong: #0f5f70;
+      --warm: #b75d36;
+      --ok: #2f7d5c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.45;
+    }
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 48px;
+    }
+    header {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(280px, .55fr);
+      gap: 24px;
+      align-items: end;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+    h1, h2, p { margin: 0; }
+    h1 {
+      max-width: 12ch;
+      font-size: clamp(2.1rem, 5vw, 4.6rem);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+    p { color: var(--muted); }
+    .lead {
+      max-width: 62ch;
+      margin-top: 12px;
+      color: #39414d;
+      font-size: 1.06rem;
+    }
+    .meta {
+      display: grid;
+      gap: 8px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    .meta strong {
+      color: var(--ink);
+      font-size: .86rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .lab {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 18px;
+      margin-top: 24px;
+      align-items: stretch;
+    }
+    .stage {
+      position: relative;
+      min-height: 560px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #101418;
+      box-shadow: 0 18px 48px rgba(20, 27, 36, .12);
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 560px;
+    }
+    .hud {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      pointer-events: none;
+    }
+    .metric {
+      min-height: 74px;
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 8px;
+      background: rgba(9, 15, 24, .72);
+      color: #eef7fb;
+      backdrop-filter: blur(12px);
+    }
+    .metric span {
+      display: block;
+      color: rgba(238, 247, 251, .72);
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .metric strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 1.35rem;
+      line-height: 1;
+    }
+    aside {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+    .panel {
+      display: grid;
+      gap: 14px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    .control {
+      display: grid;
+      gap: 7px;
+    }
+    label {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: #27313d;
+      font-weight: 750;
+    }
+    label span {
+      color: var(--muted);
+      font-weight: 650;
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+    .toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      min-height: 42px;
+      padding-top: 2px;
+    }
+    button {
+      min-height: 42px;
+      border: 0;
+      border-radius: 6px;
+      background: var(--accent);
+      color: #fff;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    button:hover { background: var(--accent-strong); }
+    .notes {
+      display: grid;
+      gap: 10px;
+      margin-top: 24px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--warm);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    .notes ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+    .notes li + li { margin-top: 5px; }
+    a {
+      color: var(--accent);
+      text-underline-offset: 3px;
+      overflow-wrap: anywhere;
+    }
+    @media (max-width: 880px) {
+      main {
+        width: min(100%, 420px);
+        padding: 22px 14px 42px;
+      }
+      header, .lab { grid-template-columns: 1fr; }
+      .hud {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .stage, canvas { min-height: 500px; }
+      .metric { min-height: 58px; }
+      .metric strong { font-size: 1.12rem; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>WebGL render lab</h1>
+        <p class="lead">A small browser graphics sample: shader-driven motion, resize-safe canvas handling, pointer interaction, live quality controls, and performance readouts.</p>
+      </div>
+      <div class="meta">
+        <strong>Scope</strong>
+        <p>Built as a compact proof slice for real-time visuals, graphics debugging, and performance-minded UI work.</p>
+      </div>
+    </header>
+
+    <section class="lab" aria-label="Interactive WebGL render lab">
+      <div class="stage">
+        <canvas id="gl-canvas" aria-label="Animated WebGL shader field"></canvas>
+        <div class="hud" aria-live="polite">
+          <div class="metric"><span>Frame</span><strong id="fps">-- fps</strong></div>
+          <div class="metric"><span>GPU budget</span><strong id="budget">-- ms</strong></div>
+          <div class="metric"><span>Quality</span><strong id="quality">1.00x</strong></div>
+          <div class="metric"><span>Mode</span><strong id="mode">live</strong></div>
+        </div>
+      </div>
+
+      <aside aria-label="Render controls">
+        <div class="panel">
+          <h2>Controls</h2>
+          <div class="control">
+            <label for="density">Field detail <span id="density-value">36</span></label>
+            <input id="density" type="range" min="12" max="48" value="36">
+          </div>
+          <div class="control">
+            <label for="speed">Motion speed <span id="speed-value">0.70</span></label>
+            <input id="speed" type="range" min="0" max="140" value="70">
+          </div>
+          <div class="control">
+            <label for="scale">Resolution scale <span id="scale-value">1.00</span></label>
+            <input id="scale" type="range" min="55" max="125" value="100">
+          </div>
+          <div class="toggle">
+            <label for="calm">Reduced motion</label>
+            <input id="calm" type="checkbox">
+          </div>
+          <button id="reset" type="button">Reset view</button>
+        </div>
+        <div class="panel">
+          <h2>What this proves</h2>
+        <p>Real canvas sizing, shader compile/error handling, interaction state, animation throttling, and responsive layout without asking for app secrets or repo access.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="notes" aria-label="Implementation notes">
+      <h2>Implementation notes</h2>
+      <ul>
+        <li>Plain WebGL fragment shader with deterministic moving fields and pointer influence.</li>
+        <li>Resolution scale control changes the backing buffer size without changing layout.</li>
+        <li>Reduced motion mode keeps interaction available while freezing time-based animation.</li>
+        <li>No build step, external package install, account access, or environment variables required.</li>
+      </ul>
+      <p><a href="../index.html">Back to samples</a></p>
+    </section>
+  </main>
+
+  <script>
+    const canvas = document.getElementById("gl-canvas");
+    const gl = canvas.getContext("webgl", {
+      antialias: false,
+      alpha: false,
+      powerPreference: "high-performance",
+      preserveDrawingBuffer: true
+    }) || canvas.getContext("experimental-webgl", {
+      antialias: false,
+      alpha: false,
+      powerPreference: "high-performance",
+      preserveDrawingBuffer: true
+    });
+    const fpsEl = document.getElementById("fps");
+    const budgetEl = document.getElementById("budget");
+    const qualityEl = document.getElementById("quality");
+    const modeEl = document.getElementById("mode");
+    const density = document.getElementById("density");
+    const densityValue = document.getElementById("density-value");
+    const speed = document.getElementById("speed");
+    const speedValue = document.getElementById("speed-value");
+    const scale = document.getElementById("scale");
+    const scaleValue = document.getElementById("scale-value");
+    const calm = document.getElementById("calm");
+    const reset = document.getElementById("reset");
+
+    const state = {
+      pointerX: 0.52,
+      pointerY: 0.45,
+      targetX: 0.52,
+      targetY: 0.45,
+      start: performance.now(),
+      last: performance.now(),
+      fps: 0,
+      frameCount: 0,
+      frameAccum: 0,
+      renderScale: 1,
+      reduced: false
+    };
+
+    function fail(message) {
+      const stage = canvas.parentElement;
+      stage.style.background = "#141414";
+      stage.innerHTML = `<div style="padding:24px;color:#fff;font:600 16px system-ui">${message}</div>`;
+    }
+
+    if (!gl) {
+      fail("WebGL is not available in this browser.");
+    } else {
+      const vertexSource = `
+        attribute vec2 a_position;
+        void main() {
+          gl_Position = vec4(a_position, 0.0, 1.0);
+        }`;
+
+      const fragmentSource = `
+        precision highp float;
+        uniform vec2 u_resolution;
+        uniform vec2 u_pointer;
+        uniform float u_time;
+        uniform float u_detail;
+
+        mat2 rot(float a) {
+          float s = sin(a);
+          float c = cos(a);
+          return mat2(c, -s, s, c);
+        }
+
+        float fieldPoint(vec2 uv, vec2 seed, float i, float time) {
+          vec2 p = seed;
+          p += 0.16 * vec2(sin(time * (0.34 + i * 0.007) + i), cos(time * (0.26 + i * 0.011) - i * 1.7));
+          float d = length(uv - p);
+          return 0.0085 / max(d * d, 0.0012);
+        }
+
+        void main() {
+          vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+          vec2 centered = uv - 0.5;
+          centered.x *= u_resolution.x / max(u_resolution.y, 1.0);
+          centered = rot(0.18 * sin(u_time * 0.22)) * centered;
+
+          float detail = clamp(u_detail, 12.0, 48.0);
+          float energy = 0.0;
+          float ribbon = 0.0;
+          for (int n = 0; n < 48; n++) {
+            float i = float(n);
+            if (i >= detail) { break; }
+            vec2 seed = vec2(
+              fract(sin(i * 37.17) * 431.13),
+              fract(cos(i * 19.71) * 271.91)
+            );
+            energy += fieldPoint(uv, seed, i, u_time);
+            ribbon += sin((centered.x * (3.4 + i * 0.02) + centered.y * 2.3 + i * 0.13 + u_time * 0.35)) * 0.003;
+          }
+
+          vec2 pointer = vec2(u_pointer.x, 1.0 - u_pointer.y);
+          float cursor = smoothstep(0.34, 0.0, length(uv - pointer));
+          float wave = sin((centered.x * 8.0 + centered.y * 5.0) + u_time * 0.85) * 0.5 + 0.5;
+          float glow = clamp(energy * 0.034 + ribbon + cursor * 0.32, 0.0, 1.0);
+
+          vec3 deep = vec3(0.02, 0.06, 0.10);
+          vec3 teal = vec3(0.07, 0.52, 0.54);
+          vec3 gold = vec3(0.90, 0.62, 0.17);
+          vec3 rust = vec3(0.72, 0.26, 0.14);
+          vec3 color = mix(deep, teal, smoothstep(0.05, 0.78, glow));
+          color = mix(color, gold, smoothstep(0.52, 0.92, glow) * (0.45 + wave * 0.35));
+          color = mix(color, rust, cursor * 0.36);
+          color += vec3(0.012, 0.018, 0.025) * sin(uv.y * 44.0 + u_time);
+          gl_FragColor = vec4(pow(color, vec3(0.92)), 1.0);
+        }`;
+
+      function shader(type, source) {
+        const s = gl.createShader(type);
+        gl.shaderSource(s, source);
+        gl.compileShader(s);
+        if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+          throw new Error(gl.getShaderInfoLog(s) || "Shader compile failed");
+        }
+        return s;
+      }
+
+      function program() {
+        const p = gl.createProgram();
+        gl.attachShader(p, shader(gl.VERTEX_SHADER, vertexSource));
+        gl.attachShader(p, shader(gl.FRAGMENT_SHADER, fragmentSource));
+        gl.linkProgram(p);
+        if (!gl.getProgramParameter(p, gl.LINK_STATUS)) {
+          throw new Error(gl.getProgramInfoLog(p) || "Program link failed");
+        }
+        return p;
+      }
+
+      let renderProgram;
+      try {
+        renderProgram = program();
+      } catch (error) {
+        fail(error.message);
+      }
+
+      if (renderProgram) {
+        const positions = new Float32Array([-1, -1, 3, -1, -1, 3]);
+        const buffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+
+        const aPosition = gl.getAttribLocation(renderProgram, "a_position");
+        const uResolution = gl.getUniformLocation(renderProgram, "u_resolution");
+        const uPointer = gl.getUniformLocation(renderProgram, "u_pointer");
+        const uTime = gl.getUniformLocation(renderProgram, "u_time");
+        const uDetail = gl.getUniformLocation(renderProgram, "u_detail");
+
+        function resize() {
+          const box = canvas.getBoundingClientRect();
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          state.renderScale = Number(scale.value) / 100;
+          const width = Math.max(1, Math.floor(box.width * dpr * state.renderScale));
+          const height = Math.max(1, Math.floor(box.height * dpr * state.renderScale));
+          if (canvas.width !== width || canvas.height !== height) {
+            canvas.width = width;
+            canvas.height = height;
+          }
+          qualityEl.textContent = `${state.renderScale.toFixed(2)}x`;
+          scaleValue.textContent = state.renderScale.toFixed(2);
+        }
+
+        function updateControls() {
+          densityValue.textContent = density.value;
+          speedValue.textContent = (Number(speed.value) / 100).toFixed(2);
+          state.reduced = calm.checked;
+          modeEl.textContent = state.reduced ? "calm" : "live";
+          resize();
+        }
+
+        function draw(now) {
+          resize();
+          const elapsed = state.reduced ? 0.0 : (now - state.start) / 1000 * (Number(speed.value) / 100);
+          state.pointerX += (state.targetX - state.pointerX) * 0.08;
+          state.pointerY += (state.targetY - state.pointerY) * 0.08;
+
+          gl.viewport(0, 0, canvas.width, canvas.height);
+          gl.useProgram(renderProgram);
+          gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+          gl.enableVertexAttribArray(aPosition);
+          gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
+          gl.uniform2f(uResolution, canvas.width, canvas.height);
+          gl.uniform2f(uPointer, state.pointerX, state.pointerY);
+          gl.uniform1f(uTime, elapsed);
+          gl.uniform1f(uDetail, Number(density.value));
+          gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+          const delta = now - state.last;
+          state.last = now;
+          state.frameCount += 1;
+          state.frameAccum += delta;
+          if (state.frameAccum >= 500) {
+            state.fps = Math.round(1000 / Math.max(delta, 1));
+            fpsEl.textContent = `${state.fps} fps`;
+            budgetEl.textContent = `${delta.toFixed(1)} ms`;
+            state.frameAccum = 0;
+            state.frameCount = 0;
+          }
+          requestAnimationFrame(draw);
+        }
+
+        canvas.addEventListener("pointermove", (event) => {
+          const rect = canvas.getBoundingClientRect();
+          state.targetX = (event.clientX - rect.left) / Math.max(rect.width, 1);
+          state.targetY = (event.clientY - rect.top) / Math.max(rect.height, 1);
+        });
+        window.addEventListener("resize", resize);
+        [density, speed, scale, calm].forEach((input) => input.addEventListener("input", updateControls));
+        reset.addEventListener("click", () => {
+          density.value = "36";
+          speed.value = "70";
+          scale.value = "100";
+          calm.checked = false;
+          state.targetX = 0.52;
+          state.targetY = 0.45;
+          updateControls();
+        });
+        updateControls();
+        requestAnimationFrame(draw);
+      }
+    }
+  </script>
+</body>
+</html>
